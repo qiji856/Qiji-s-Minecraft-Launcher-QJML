@@ -1,0 +1,74 @@
+{
+  "name": "qjml",
+  "version": "3.16.0",
+  "description": "Qiji's Minecraft Launcher",
+  "main": "main.js",
+  "author": "QJML Contributors",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "test:core": "node test/core.test.js",
+    "test:launch": "node test/launch.test.js",
+    "test:ui": "node test/ui.test.js",
+    "test:render": "node test/render.test.js",
+    "test:neoforge": "node test/neoforge.test.js",
+    "test:preset": "node test/preset.test.js",
+    "test:mirror": "node test/mirror.test.js",
+    "test:deps": "node test/deps.test.js",
+    "test:compat": "node test/modcompat.test.js",
+    "test:wizard": "node test/wizard.test.js",
+    "test:custommod": "node test/custommod.test.js",
+    "test:bundledmod": "node test/bundledmod.test.js",
+    "test:mpsync": "node test/mp-sync.test.js",
+    "test:mpe2e": "node test/mp-e2e.test.js",
+    "test:smoke": "node test/electron-smoke.test.js",
+    "test:packaged": "node test/packaged-smoke.test.js",
+    "test": "node test/core.test.js && node test/launch.test.js && node test/ui.test.js && node test/render.test.js && node test/neoforge.test.js && node test/preset.test.js && node test/mirror.test.js && node test/deps.test.js && node test/modcompat.test.js && node test/wizard.test.js && node test/custommod.test.js && node test/optifine-compat.test.js && node test/invite-close.test.js && node test/bundledmod.test.js && node test/mp-sync.test.js && node test/mp-e2e.test.js && node test/theme-msauth-cf.test.js && node test/instances-mgr.test.js && node test/crashdiag.test.js && node test/gameOptions.test.js && node test/launchfix.test.js && node test/loaders-version.test.js && node test/modscan.test.js && node test/msauth.test.js && node test/multiplayer.test.js && node test/newfix.test.js && node test/updater.test.js && node test/worlds.test.js && node test/electron-smoke.test.js && node test/packaged-smoke.test.js",
+    "dist": "node tools/fetch-terracotta.js && node tools/fetch-loaders.js && node tools/sync-version.js && electron-builder --win --x64",
+    "test:optifine": "node test/optifine-compat.test.js",
+    "test:invite": "node test/invite-close.test.js"
+  },
+  "dependencies": {
+    "jszip": "^3.10.2",
+    "adm-zip": "^0.5.16"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.qjml.app",
+    "productName": "Qiji's Minecraft Launcher",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "build/icon.ico"
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "src/core/bin/**"
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": "x64"
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "QJML",
+      "artifactName": "QJML-Setup-3.16.${ext}"
+    }
+  }
+}
